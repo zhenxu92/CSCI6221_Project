@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">OlympicMedal</string>
+    <string name="action_settings">Settings</string>
+    <string name="weightlifting">Weightlifting</string>
+    <string name="cycling">Cycling</string>
+    <string name="new_medal">New Medal</string>
+    <string name="gold_medals">Gold Medals</string>
+    <string name="title_activity_add_medal">AddMedalActivity</string>
+    <string name="add_medal">Add Medal</string>
+</resources>

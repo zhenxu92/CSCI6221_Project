@@ -1,0 +1,53 @@
+<div class="cell">
+  <div class="sports-list">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="people">
+              PEOPLE
+            </a>
+
+          </h2>
+        </div>
+      </li>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="organization">
+              ORGANIZATION
+            </a>
+
+          </h2>
+        </div>
+      </li>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="fact">
+              FACT
+            </a>
+
+          </h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="container">
+    <div class="col-md-4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at tellus vitae sapien consectetur vestibulum vitae nec justo. Pellentesque pellentesque libero semper quam ultricies, sed feugiat mauris molestie. Phasellus at ipsum mi. Sed sollicitudin rutrum nulla, at convallis lorem. Praesent quis tincidunt dolor. Curabitur vitae efficitur urna. Phasellus vestibulum faucibus urna, sed rhoncus libero ornare vel. Fusce imperdiet nulla leo, sit amet eleifend nunc pretium at. Sed at justo eu nisi sollicitudin porta at eget tellus.</p>
+    </div>
+    <div class="col-md-4 status">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at tellus vitae sapien consectetur vestibulum vitae nec justo. Pellentesque pellentesque libero semper quam ultricies, sed feugiat mauris molestie. Phasellus at ipsum mi. Sed sollicitudin rutrum nulla, at convallis lorem. Praesent quis tincidunt dolor. Curabitur vitae efficitur urna. Phasellus vestibulum faucibus urna, sed rhoncus libero ornare vel. Fusce imperdiet nulla leo, sit amet eleifend nunc pretium at. Sed at justo eu nisi sollicitudin porta at eget tellus.</p>
+</div>
+
+
+<div  class="cell" ui-view>
+
+</div>

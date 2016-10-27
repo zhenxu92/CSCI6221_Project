@@ -1,0 +1,129 @@
+
+<div class="cell">
+  <div class="sports-list">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="people">
+              PEOPLE
+            </a>
+
+          </h2>
+        </div>
+      </li>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="organization">
+              ORGANIZATION
+            </a>
+
+          </h2>
+        </div>
+      </li>
+      <li class="grid-box grid-box--6of12 sport-name">
+        <div class="card" >
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="fact">
+              FACT
+            </a>
+
+          </h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <th> Name</th>
+        <th> Needs</th>
+        <th> Notes</th>
+    </thead>
+
+    <tbody>
+<!--        TODO: 1 Add Repeat in homeless name, needs; 2 Add href to Popup window with Stories.-->
+        <tr ng-repeat="sport in sportsCtrl.sports">
+            <td><a data-toggle="modal" data-target="#myModal{{sport._id}}">{{sport.name}}</a></td>
+            <td>{{sport.needs}}</td>
+            <td>{{sport.note}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div id="myModal{{sport._id}}" class="modal fade" role="dialog" ng-repeat="sport in sportsCtrl.sports">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{sport.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{sport.story}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#donateModal{{sport._id}}">Donate</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--Donate Modal-->
+<div id="donateModal{{sport._id}}" class="modal fade" role="dialog" ng-repeat="sport in sportsCtrl.sports">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Donate To {{sport.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mailchimp">
+
+                    <div id="mc_embed_signup">
+                        <form action="http://coolestguyplanettech.us7.list-manage1.com/subscribe/post?u=0ba0990db8437f4048d542abd&amp;id=fcf0036cf1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                        <label for="mce-EMAIL">This donation will goes directly to {{sport.name}}</label>
+                        Amount: <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="How much do you want to donate?" required=""> <br>
+                        Credit Card#:<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Add in your email address..." required=""><br>
+                        Your Name: <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Add in your email address..." required="">
+                        </form>
+                    </div>
+                </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#successModal">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--success modal-->
+<div id="successModal" class="modal fade" role="dialog" ng-repeat="sport in sportsCtrl.sports">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" href="index.html">&times;</button>
+                <h4 class="modal-title">Success!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Thank you for your donation!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onClick="window.location.reload()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div  class="cell" ui-view>
+
+</div>
