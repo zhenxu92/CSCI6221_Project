@@ -648,5 +648,10 @@ app.delete("/organizations/:id/:goalId", (request, response) => {
 
 });
 
+// picture related
+// get the picture or other related assets (if we need them), just one line of code
+app.use(express.static(__dirname + '/public'));
+// upload the picture
+
 
 app.listen(8181, () => console.log("Listening on 8181"));
