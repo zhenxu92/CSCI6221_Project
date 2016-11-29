@@ -19,6 +19,16 @@ function isPositiveInt(object) {
     }
     return intObject;
 }
+
+function processPayment(amount) {
+    console.log("Paying " + amount);
+
+
+
+
+}
+
+
 // people related
 // display the list of names of people
 app.get("/peopleNames", (request, response) => {
@@ -211,7 +221,7 @@ app.get("/organizations/:id", (request, response) => {
 
 // update the current amount of donation to a project
 // the update format
-let format = { "_id": "$id", "amount": "$amount" };
+let format = { "_id": "$id", "amount": "$amount" }; // might include payment info as well
 
 app.post("/organizations/:id/donate", jsonParser, (request, response) => {
     let organizationID = parseInt(request.params.id);
@@ -257,28 +267,29 @@ app.post("/organizations/:id/donate", jsonParser, (request, response) => {
 
                         // try to finish the donation. Questions about over donation/ concurrency issues
                         console.log(doc);
-                        doc.donation_goals[donationID].current += amount;
-                        console.log(doc);
-                        organization.findOneAndUpdate({ _id: organizationID }, doc, (err, res) => {
-                            if (err) {
-                                response.sendStatus(400);
-                            }
-                            else {
-                                /*if (current >= total) {
-                                    response.send("We have reached our goal, and we don't need your donation at this time. Thank you anyway.");
-
-                                }
-                                else if (current + amount > total) {
-                                    response.send("Congractulations! Your donation of 100 helps us reached our goal. Thank you. Only 100 is charged. ")
+                        console.log("Begin Donation");
+                        // the actual payment process goes here
+                        // intentionally pause the donation for 10 seconds to simulate real world
+                        setTimeout(function () {
+                            doc.donation_goals[donationID].current += amount;
+                            console.log(doc);
+                            organization.findOneAndUpdate({ _id: organizationID }, doc, (err, res) => {
+                                if (err) {
+                                    response.sendStatus(400);
                                 }
                                 else {
-                                    response.send("We have received your donation. Thank you.")
-                                }*/
-                                response.sendStatus(201);
 
-                            }
+                                    response.sendStatus(201);
 
-                        });
+                                }
+
+                            });
+                            console.log("Finish Donation");
+
+
+                        }, 10000);
+
+
                     }
 
                 }
@@ -495,9 +506,9 @@ app.delete("/people/:id/:orgID", (request, response) => {
     let people = mongoUtil.people();
     let id = isPositiveInt(request.params.id);
     let organization = mongoUtil.organizations();
-    let orgID= isPositiveInt(request.params.orgID);
+    let orgID = isPositiveInt(request.params.orgID);
     // delete
-    if (!id || !orgID ) {
+    if (!id || !orgID) {
         response.sendStatus(400);
     }
     people.remove({ _id: id }, (err) => {
@@ -506,35 +517,35 @@ app.delete("/people/:id/:orgID", (request, response) => {
         }
         // remove the person from organization
         organization.find({ _id: orgID }).limit(1).next((err, doc) => {
-            if(err){
+            if (err) {
                 response.sendStatus(400);
 
             }
-            else{
-                let residents=doc["featured_residents"];
-                let ind=residents.indexOf(id);
+            else {
+                let residents = doc["featured_residents"];
+                let ind = residents.indexOf(id);
                 console.log(ind);
-                if(ind>-1){
-                    residents.splice(ind,1);
+                if (ind > -1) {
+                    residents.splice(ind, 1);
                 }
-                doc["featured_residents"]=residents;
-                organization.findOneAndUpdate({_id:orgID},doc,(err)=>{
-                    if(err){
+                doc["featured_residents"] = residents;
+                organization.findOneAndUpdate({ _id: orgID }, doc, (err) => {
+                    if (err) {
                         response.sendStatus(400);
                     }
-                    else{
-                         response.sendStatus(200);
+                    else {
+                        response.sendStatus(200);
                     }
 
 
                 });
-               
+
 
             }
         });
 
 
-        
+
 
     })
 });
@@ -567,11 +578,11 @@ app.post("/organizations/:id/newgoal", jsonParser, (request, response) => {
 });
 
 // change the donation goal
-app.post("/organizations/:id/:goalId",jsonParser,(request,response)=>{
+app.post("/organizations/:id/:goalId", jsonParser, (request, response) => {
     let organization = mongoUtil.organizations();
     let id = isPositiveInt(request.params.id);
     // intentionally divide this by 10, or it will not work
-    let goalId = (isPositiveInt(request.params.goalId + 1) - 1) / 10; 
+    let goalId = (isPositiveInt(request.params.goalId + 1) - 1) / 10;
     console.log("orgID:" + id);
     console.log("goalID:" + goalId);
     // people.find({ _id: id }).limit(1).next((err, doc) => {
@@ -584,7 +595,7 @@ app.post("/organizations/:id/:goalId",jsonParser,(request,response)=>{
 
             let goals = doc["donation_goals"];
             // update the goal here
-            goals[goalId-1]=request.body;
+            goals[goalId - 1] = request.body;
 
             doc["donation_goals"] = goals;
             console.log(doc);
@@ -599,7 +610,7 @@ app.post("/organizations/:id/:goalId",jsonParser,(request,response)=>{
                 }
 
             });
-            
+
 
         }
     });
@@ -640,7 +651,7 @@ app.delete("/organizations/:id/:goalId", (request, response) => {
                 }
 
             });
-            
+
 
         }
     });
@@ -652,6 +663,8 @@ app.delete("/organizations/:id/:goalId", (request, response) => {
 // get the picture or other related assets (if we need them), just one line of code
 app.use(express.static(__dirname + '/public'));
 // upload the picture
+
+
 
 
 app.listen(8181, () => console.log("Listening on 8181"));
