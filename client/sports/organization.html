@@ -1,58 +1,19 @@
-<div class="cell">
-  <div class="sports-list">
-    <ul class="grid list list--unstyled mbl" ng-cloak>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
 
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="people">
-              PEOPLE
-            </a>
 
-          </h2>
-        </div>
-      </li>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
-
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="organization">
-              ORGANIZATION
-            </a>
-
-          </h2>
-        </div>
-      </li>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
-
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="fact">
-              FACT
-            </a>
-
-          </h2>
-        </div>
-      </li>
-    </ul>
-  </div>
+<div class="row">
+    <div ng-repeat="sport in sportsCtrl.sports | limitTo: 4" class="col-sm-6 myDiv">
+<!--        <h2><a title="{{sport.name}}">{{sport.name}}</a></h2>-->
+        <a class="hvr-grow" data-toggle="modal" data-target="#myModal{{sport._id}}"><img class="myImg" ng-src="{{sport.picture}}" width="300px" height="300px"></a>        
+    </div>
 </div>
 
+<!--list all btn-->
+<div class="row">
+    <div class="col-sm-12 midDiv">
+        <a class="btn btn-primary hvr-underline-from-left" ui-sref="listOfOrgs">See all of them</a>    
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <th> Name</th>
-        <th> Info</th>
-    </thead>
-
-    <tbody>
-<!--        TODO: 1 Add Repeat in homeless name, needs; 2 Add href to Popup window with Stories.-->
-        <tr ng-repeat="sport in sportsCtrl.sports">
-            <td><a data-toggle="modal" data-target="#myModal{{sport._id}}">{{sport.name}}</a></td>
-            <td>{{sport.location}}</td>
-        </tr>
-    </tbody>
-</table>
 
 <!-- Modal -->
 <div id="myModal{{sport._id}}" class="modal fade" role="dialog" ng-repeat="sport in sportsCtrl.sports">
@@ -65,8 +26,11 @@
         <h4 class="modal-title">{{sport.name}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{sport.info}}</p>
+            <img ng-src="{{sport.picture}}" height="150px" width="150px">
+            <p class="storyPar">{{sport.story}}</p>
+            <p><b>Area:</b> {{sport.area}}</p>          
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#donateModal{{sport._id}}">Donate</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -85,43 +49,91 @@
                 <h4 class="modal-title">Donate To {{sport.name}}</h4>
             </div>
             <div class="modal-body">
-                <div class="mailchimp">
+                <div>
+                    <div>
+                        <form name="reviewForm" ng-submit="reviewForm.$valid" novalidate>
+                            <div class="form-group row">
+                                <label class="col-xs-5 col-form-label">Name</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" placeholder="Enter your name" required/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-5 col-form-label">Credit card number</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" placeholder="Enter your credit card number" required/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-5 col-form-label">Expiration</label>
+                                <div class="col-xs-3">
+                                    <select class="form-control" id="exampleSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-3">
+                                    <select class="form-control" id="exampleSelect1">
+                                      <option>2016</option>
+                                      <option>2017</option>
+                                      <option>2018</option>
+                                      <option>2019</option>
+                                      <option>2020</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-5 col-form-label">Security code</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" placeholder="Enter your security code" required/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-5 col-form-label">Your email</label>
+                                <div class="col-xs-7">
+                                    <input type="email" class="form-control" placeholder="Enter your email" aria-describedby="emailHelp" required/>
+                                    <small id="emailHelp" class="form-text text-muted">A receipt will be sent to your email. We'll never share your email with anyone else.</small>
+                                </div>
+                            </div>
 
-                    <div id="mc_embed_signup">
-                        <form action="http://coolestguyplanettech.us7.list-manage1.com/subscribe/post?u=0ba0990db8437f4048d542abd&amp;id=fcf0036cf1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-                        <label for="mce-EMAIL">This donation will goes directly to {{sport.name}}</label>
-                        Amount: <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="How much do you want to donate?" required=""><br>
-                        Credit Card#: <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter Your credit card Number" required=""><br>
-                        Your Name: <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter Your Name Please" required="">
+
+                            <div>review Form is {{reviewForm.$valid}}</div> 
                         </form>
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#successModal">Submit</button>
+                <button type="submit" value="Submit" class="btn btn-default" data-toggle="modal" data-target="#successModal">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
+<!--success modal-->
 <div id="successModal" class="modal fade" role="dialog" ng-repeat="sport in sportsCtrl.sports">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" href="sports-nav.html">&times;</button>
+                <button type="button" class="close" href="index.html">&times;</button>
                 <h4 class="modal-title">Success!</h4>
             </div>
             <div class="modal-body">
                 <p class="lead">Thank you for your donation!</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick="window.location.reload()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onClick="window.location.reload()">Close</button>
             </div>
         </div>
     </div>
-</div>
-
-<div  class="cell" ui-view>
-
 </div>

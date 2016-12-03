@@ -16,8 +16,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,300,400italic">
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/custom.css">
+    <link rel="stylesheet" href="css/hover.css">
+<!--    <link rel="stylesheet" href="styles/slideshow.css">-->
+<!--    <script src="js/autoslideshow.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTGz-8WdB90SdLXzAqxGYV6mbZATBXw_k&libraries=places&callback=initMap" 
+          type="text/javascript"></script>
     <style>
         [ng\:cloak],
         [ng-cloak],
@@ -34,11 +40,52 @@
     <div class="container">
         <div class="header">
             <div class="cell">
-                <h1 class="logo">Off The Street</h1>
+                <h1 class="logo">Off The Street   <img src="https://s6.postimg.org/3o0wlzsg1/logo.png"><span class="mySpan"> ---Support homeless with your donation today!</span></h1>
+                
             </div>
         </div>
+        <div class="cell">
+          <div class="sports-list">
+            <ul class="grid list list--unstyled mbl" ng-cloak>
+              <li class="grid-box grid-box--6of12 sport-name hvr-fade">
+                <div class="card" >
+                  <h2 class="card-title">
 
+                    <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="people">
+                      PEOPLE
+                    </a>
+
+                  </h2>
+                </div>
+              </li>
+              <li class="grid-box grid-box--6of12 sport-name hvr-fade">
+                <div class="card" >
+                  <h2 class="card-title">
+
+                    <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="organization">
+                      ORGANIZATION
+                    </a>
+
+                  </h2>
+                </div>
+              </li>
+              <li class="grid-box grid-box--6of12 sport-name hvr-fade">
+                <div class="card" >
+                  <h2 class="card-title">
+
+                    <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="fact">
+                      MAP
+                    </a>
+
+                  </h2>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
         <div class="cell" ui-view></div>
+        
     </div>
 
 

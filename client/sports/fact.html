@@ -1,53 +1,37 @@
-<div class="cell">
-  <div class="sports-list">
-    <ul class="grid list list--unstyled mbl" ng-cloak>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
-
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="people">
-              PEOPLE
-            </a>
-
-          </h2>
-        </div>
-      </li>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
-
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="organization">
-              ORGANIZATION
-            </a>
-
-          </h2>
-        </div>
-      </li>
-      <li class="grid-box grid-box--6of12 sport-name">
-        <div class="card" >
-          <h2 class="card-title">
-
-            <a class="card-link card-link--{{ sport.toLowerCase() }}" ui-sref="fact">
-              FACT
-            </a>
-
-          </h2>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
 
 
-<div class="container">
-    <div class="col-md-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at tellus vitae sapien consectetur vestibulum vitae nec justo. Pellentesque pellentesque libero semper quam ultricies, sed feugiat mauris molestie. Phasellus at ipsum mi. Sed sollicitudin rutrum nulla, at convallis lorem. Praesent quis tincidunt dolor. Curabitur vitae efficitur urna. Phasellus vestibulum faucibus urna, sed rhoncus libero ornare vel. Fusce imperdiet nulla leo, sit amet eleifend nunc pretium at. Sed at justo eu nisi sollicitudin porta at eget tellus.</p>
-    </div>
-    <div class="col-md-4 status">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at tellus vitae sapien consectetur vestibulum vitae nec justo. Pellentesque pellentesque libero semper quam ultricies, sed feugiat mauris molestie. Phasellus at ipsum mi. Sed sollicitudin rutrum nulla, at convallis lorem. Praesent quis tincidunt dolor. Curabitur vitae efficitur urna. Phasellus vestibulum faucibus urna, sed rhoncus libero ornare vel. Fusce imperdiet nulla leo, sit amet eleifend nunc pretium at. Sed at justo eu nisi sollicitudin porta at eget tellus.</p>
-</div>
+  <div id="map" style="width: 900px; height: 400px;"></div>
 
+  <script type="text/javascript">
+    var locations = [
+      ['Bread of Life Mission, 97 S. Main Street, Seattle, WA, 98104', 47.5999074, -122.3346866, 4],
+      ['1609 19th Ave #100, Seattle, WA 98122', -47.6155434, -122.30777419, 5],
+      ['1700 23rd Ave, Seattle, WA 98122', 47.6167815, 122.30203019999999, 3],
+      ['Jubilee Women Center, 620 18th Ave E, Seattle, WA 98112', 47.62505170000001, -122.30824330000002, 2]
+    ];
 
-<div  class="cell" ui-view>
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: new google.maps.LatLng(47.6062095, -122.3320708),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
-</div>
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+
