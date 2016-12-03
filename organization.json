@@ -1,0 +1,46 @@
+{"_id":1.0,
+	"name":"Bread of Life Mission",
+	"info":"Founded in 1939 Bread of Life exists to overcome the cycle of homelessness in people's lives",
+	"location":"97 S. Main Street, Seattle, WA, 98104",
+	"featured_residents":[1.0,2.0,3.0],
+	"picture":"https://s6.postimg.org/krzu5p6td/bread_of_life_mission_mod.jpg",
+	"donation_goals":
+		[
+			{"name":"Laptop for job center",
+			"total":500.0,
+			"current":400.0,
+			"img":"pic1_1.png"},
+			{"name":"Laptop for work center",
+			"total":1500.0,
+			"current":500.0,
+			"img":"pic1_2.png"},
+			{"name":"Laptop for sleeping center",
+			"total":2500.0,
+			"current":700.0,
+			"img":"pic1_3.png"}
+		]
+}
+{"_id":2.0,
+	"name":"Peace for The Street",
+	"info":"We exist to support homeless and at-risk youth and young adults to become empowered to lead positive and self-sufficient lives. \n Our philosophy and practice of inclusion has allowed us to develop low access barriers to engage young people who are at risk of falling through gaps in community services.",
+	"location":"1609 19th Ave #100, Seattle, WA 98122",
+	"featured_residents":[1.0,2.0,4.0],
+	"picture":"https://s6.postimg.org/r6yv2ddj5/peace_for_the_street_mod.jpg",
+	"donation_goals":[
+		{"name":"Laptop for job center","total":500.0,"current":302.0},
+		{"name":"Laptop for work center","total":1502.0,"current":500.0}
+	]
+}
+{"_id":3.0,
+	"location":"1700 23rd Ave, Seattle, WA",
+	"picture":"https://s6.postimg.org/ffazrkiwx/ywca_mod.jpg",
+	"donation_goals":[{"name":"Pillows","total":50.0,"current":20.0}],
+	"info":"YWCA is on a mission to eliminate racism, empower women, stand up for social justice, help families, and strengthen communities. A regional leader for change since 1894, YWCA Seattle | King | Snohomish operates 30 program sites across two counties and serves 15,000 people each year.","name":"YWCA"
+}
+{"_id":4.0,
+	"picture":"https://s6.postimg.org/po3gxe6yp/jubilee_womens_center_mod.jpg",
+	"location":"620 18th Ave E, Seattle, WA 98112",
+	"name":"Jubilee Women Center",
+	"info":"Jubilee Women’s Center supports women experiencing poverty to build stable and fulfilling futures, one extraordinary woman at a time. Led by the guiding principle that women of all races and cultures are to be treated with respect and dignity, Jubilee provides programs and services that empower women to make positive life changes.",
+	"donation_goals":[{"name":"Sanitary stuff","total":200.0,"current":120.0}]
+}
